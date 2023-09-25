@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main
 {
+    private static java.util.Arrays Arrays;
+
     public static void func1()
     {
         Scanner in = new Scanner(System.in);
@@ -100,11 +99,42 @@ public class Main
              }
              count++;
         }
+
         System.out.printf("Кол-во инструкций: %d",count);
+    }
+    public static int[] func4(Arrays Arrays)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите количество дорог: ");
+        int roads = sc.nextInt();
+        int tunnels;
+        List<int[]> arrayRoads = new ArrayList<>();
+        int[] minRoad = new int[roads];
+        Arrays.fill(minRoad, Integer.MAX_VALUE);
+        int numberRoad = 0;
+        for (int i = 0; i < roads; i++)
+        {
+            System.out.printf("Введите количество туннелей и их высоту на %d-й дороге: ", (i+1));
+            tunnels = sc.nextInt();
+            arrayRoads.add(new int[tunnels]);
+            for (int j = 0; j < tunnels; j++)
+            {
+                arrayRoads.get(i)[j] = sc.nextInt();
+                if (arrayRoads.get(i)[j] < minRoad[i])
+                {
+                    minRoad[i] = arrayRoads.get(i)[j];
+                }
+            }
+            if (minRoad[i] > minRoad[numberRoad])
+            {
+                numberRoad = i;
+            }
+        }
+        return new int[] {numberRoad, minRoad[numberRoad]};
     }
     public static void main(String[] args)
     {
-         func3();
+        func4(Arrays);
     }
 }
 
